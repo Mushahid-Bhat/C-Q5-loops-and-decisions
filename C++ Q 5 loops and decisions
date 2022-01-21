@@ -1,0 +1,151 @@
+// C++ compiler to run C++ program online
+
+// QUESTION NO. 5
+
+#include <iostream>
+
+#include <string>
+
+using namespace std;
+
+class Employee
+
+{
+
+private:
+
+    string id;
+
+    double hourlywage;
+
+    double hoursworked;
+
+    double taxpercent = 3.625;
+
+public:
+
+    void set(string eid, double wage, double hours)
+
+    {
+
+        id = eid;
+
+        hourlywage = wage;
+
+        hoursworked = hours;
+
+    }
+
+    double grosspay()
+
+    {
+
+      double basepay, overtimepay;
+
+       if (hoursworked > 40)
+
+        {
+
+    basepay = 40 * hourlywage;
+
+ overtimepay=(hoursworked - 40)*1.5*hourlywage;
+
+        }
+
+       else
+
+        {
+
+    basepay=hoursworked*hourlywage;
+
+           overtimepay = 0;
+
+        }
+
+      return basepay + overtimepay;
+
+    }
+
+    double netpay()
+
+    {
+
+    return ((100-taxpercent)/100)*grosspay();
+
+    }
+
+    void display()
+
+    {
+
+        cout << "ID: " << id << endl;
+
+cout << "Net pay: " << netpay() << "\n";
+
+    }
+
+};
+
+int main()
+
+{
+
+    int N;
+
+    cout << "Number of employees: ";
+
+    cin >> N;
+
+  Employee employees[N];
+
+  for (int i = 0; i < N; i++)
+
+    {
+
+        string id;
+
+        double wage;
+
+        double hours;
+
+        cout << endl << " Employee " << i + 1 << endl;
+
+        cout << "Employee ID: ";
+
+        cin >> id;
+
+        cout << "Hourly wage: ";
+
+        cin >> wage;
+
+        cout << "Hours worked: ";
+
+        cin >> hours;
+
+        employees[i].set(id, wage, hours);
+
+    }
+
+double totalpayroll = 0, average;
+
+  for (int i = 0; i < N; i++)
+
+    {
+
+    totalpayroll += employees[i].grosspay();
+
+        employees[i].display();
+
+        }
+
+ average = totalpayroll / N;
+
+ cout << "Total payroll (incl. tax): " << totalpayroll << "\n";
+
+   cout << "Average pay (incl. tax): " << average << "\n";
+
+    return 0;
+
+}
+
+
